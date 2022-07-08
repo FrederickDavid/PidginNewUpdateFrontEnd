@@ -1,4 +1,4 @@
-import DisplayPidgin from "./Frederick/DisplayPidgin";
+import DisplayPidgin from "./DisplayHead/DisplayPidgin";
 
 function App() {
   return (

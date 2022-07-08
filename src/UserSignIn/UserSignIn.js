@@ -1,15 +1,63 @@
 import React from "react";
-import styled from "styled-components";
-import logo from "./mainLogo.png";
 import { NavLink } from "react-router-dom";
+import styled from "styled-components";
+// import * as yup from "yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
+// import { useForm } from "react-hook-form";
+// import axios from "axios";
+// import { useDispatch } from "react-redux";
+// import Swal from 'sweetalert2';
 
 const UserSignin = () => {
+  //   const navigate = useNavigate();
+  //   const dispatch = useDispatch();
+  //   const formSchema = yup.object().shape({
+  //     email: yup.string().email().required("This field cannot be empty"),
+  //     password: yup.string().required("This field cannot be empty"),
+  //   });
+
+  //   const {
+  //     register,
+  //     reset,
+  //     handleSubmit,
+  //     formState: { errors },
+  //   } = useForm({
+  //     resolver: yupResolver(formSchema),
+  //   });
+
+  //   const onSubmit = handleSubmit(async (value) => {
+  //     console.log(value);
+  //     const { email, password } = value;
+  //     const url = "https://pidgin-backend.herokuapp.com/pidgin/user/signin";
+
+  //     await axios.post(url, { email, password }).then((res) => {
+  //       // console.log(res.data.data);
+  //       dispatch(createUser(res.data.data));
+  //     }).catch((err) => {
+  //       if (err) {
+  //         alert(err.message);
+  //       } else {
+  //         alert("sign in sucessfully");
+  //       }
+  //     });
+  //     Swal.fire(
+  //       'Good job!',
+  //       'Clicke Ok to continue',
+  //       'success'
+  //     );
+
+  //     navigate("/BioFill");
+  //   });
+
   return (
     <Container>
       <Wrapper2>
         <CardSignin>
           <InnerCard1>
-            <Logo src={logo} />
+            <ImageHold>
+              <Logo src="/logo.png" />
+              <span>PIDGIN</span>
+            </ImageHold>
             <Text>Enter Make U See Beta Pidgin Words And Wetin E Mean</Text>
             <Text2>
               Shei you neva get account at all?
@@ -22,21 +70,20 @@ const UserSignin = () => {
 
         <Card2>
           <HeadText>Enter Account Wey You Get Before</HeadText>
-          <Label>
+          <LabelHolder>
+            {/* <Error>This field must not be empty</Error> */}
             <LabelText>Enter your email:</LabelText>
-            <Inputs placeholder="test@gmail.com" />
-          </Label>
-          <Label>
+            <Input placeholder="test@gmail.com" type="email" />
+          </LabelHolder>
+          <LabelHolder>
+            {/* <Error>This field must not be empty</Error> */}
             <LabelText>Enter your password:</LabelText>
-            <Inputs placeholder="6+ characters" type="password" />
-          </Label>
-
-          <HoldLink2 to="/confirm">
-            <Submit>Sign in</Submit>
-          </HoldLink2>
+            <Input placeholder="6+ characters" type="password" />
+          </LabelHolder>
+          <Submit type="submit">Sign in</Submit>
           <Text3>
-            Shei you neva get account at all?
-            <HoldLink to="/UserSignUp">
+            Abi you don get before?
+            <HoldLink to="/UserSignIn">
               <span>Sign up</span>
             </HoldLink>
           </Text3>
@@ -56,41 +103,6 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const Text3 = styled.div`
-  display: none;
-  @media screen and (max-width: 1024px) and (min-width: 300px) {
-    width: 70%;
-    display: flex;
-    font-weight: 400;
-    color: black;
-    font-size: 13px;
-    margin-top: 10px;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    /* margin: 20px 0px 0px 30px; */
-    span {
-      font-size: 13px;
-      font-weight: 500;
-      margin-left: 2px;
-      color: blue;
-      cursor: pointer;
-    }
-  }
-`;
-
-const HoldLink2 = styled(NavLink)`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-`;
-
-const HoldLink = styled(NavLink)`
-  text-decoration: none;
 `;
 
 const Text2 = styled.div`
@@ -119,10 +131,25 @@ const Text = styled.div`
   margin: 15px 0px 0px 20px;
 `;
 
+const ImageHold = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  span {
+    height: 70px;
+    display: flex;
+    align-items: flex-end;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+  }
+`;
+
 const Logo = styled.img`
-  width: 120px;
-  height: 80px;
-  object-fit: contain;
+  width: 65px;
+  height: 70px;
+  /* background-color: red; */
+  object-fit: cover;
   margin: 20px 0px 0px 20px;
   border-radius: 3px;
 `;
@@ -141,7 +168,7 @@ const InnerCard1 = styled.div`
 `;
 
 const CardSignin = styled.div`
-  background-image: url("/image/back.jpg");
+  background-image: url("/image/Shadow-Fall-Background.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -186,13 +213,71 @@ const Wrapper2 = styled.div`
   }
 `;
 
-const Submit = styled.div`
-  width: 80%;
+const Input = styled.input`
+  width: 97%;
+  height: 35px;
+  outline: none;
+  border-radius: 3px;
+  padding-left: 5px;
+  border: 1px solid lightgray;
+  margin-top: 3px;
+
+  ::placeholder {
+    opacity: 0.6;
+    font-size: 12px;
+  }
+  :focus {
+    outline: 2px solid rgb(76, 216, 250);
+    border: none;
+  }
+`;
+
+const LabelText = styled.label`
+  color: gray;
+  font-weight: 400;
+  font-size: 12px;
+`;
+const Error = styled.div`
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+`;
+
+const Text3 = styled.div`
+  display: none;
+  @media screen and (max-width: 1024px) and (min-width: 300px) {
+    width: 70%;
+    display: flex;
+    font-weight: 400;
+    color: black;
+    font-size: 13px;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    /* margin: 20px 0px 0px 30px; */
+    span {
+      font-size: 13px;
+      font-weight: 500;
+      margin-left: 2px;
+      color: blue;
+      cursor: pointer;
+    }
+  }
+`;
+
+const HoldLink = styled(NavLink)`
+  text-decoration: none;
+`;
+
+const Submit = styled.button`
+  width: 90%;
   height: 40px;
-  background-color: black;
+  border: none;
+  background-color: #0074f8;
   border-radius: 3px;
   color: white;
-  margin: 20px 0px;
+  margin: 30px 0px;
   font-size: 15px;
   display: flex;
   align-items: center;
@@ -207,50 +292,19 @@ const Submit = styled.div`
   }
 `;
 
-const Inputs = styled.input`
-  width: 98%;
-  height: 55%;
-  outline: none;
-  border-radius: 3px;
-  padding-left: 5px;
-  border: 1px solid lightgray;
-
-  ::placeholder {
-    opacity: 0.6;
-    font-size: 12px;
-  }
-  :focus {
-    outline: 2px solid rgb(76, 216, 250);
-    border: none;
-  }
-`;
-
-const LabelText = styled.label`
-  width: 100%;
-  /* margin-right: 10px; */
-  font-size: 12px;
-  color: gray;
-  text-align: left;
-`;
-
-const Label = styled.div`
-  width: 80%;
-  height: 60px;
-  margin: 10px 0px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+const LabelHolder = styled.div`
+  width: 90%;
+  height: auto;
+  margin-bottom: 15px;
 `;
 
 const HeadText = styled.div`
+  color: black;
+  font-weight: 500;
   margin-bottom: 40px;
-  display: flex;
-  align-items: center;
-  font-weight: 600;
 `;
 
-const Card2 = styled.div`
+const Card2 = styled.form`
   width: 375px;
   height: 100%;
   background-color: white;

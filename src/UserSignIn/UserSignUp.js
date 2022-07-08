@@ -1,55 +1,55 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "./mainLogo.png";
-import { useNavigate, NavLink } from "react-router-dom";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import axios from "axios";
+import { NavLink } from "react-router-dom";
+// import * as yup from "yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
+// import { useForm } from "react-hook-form";
+// import axios from "axios";
 
 const UserSignin = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  // // const dispatch = useDispatch();
+  // const formSchema = yup.object().shape({
+  //   fullName: yup.string().required("This field cannot be empty"),
+  //   email: yup.string().email().required("This field cannot be empty"),
+  //   password: yup.string().required("This field cannot be empty"),
+  //   confirm: yup
+  //     .string()
+  //     .oneOf([ yup.ref("password"), null ], "Password must match"),
+  // });
 
-  const formSchena = yup.object().shape({
-    userName: yup.string().required("Enter a userName"),
-    email: yup.string().email().required("This field cannot be empty"),
-    password: yup.string().required("You must set a password"),
-    confirm: yup
-      .string()
-      .oneOf([yup.ref("password"), null], "Password must match"),
-  });
+  // const {
+  //   register,
+  //   reset,
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm({
+  //   resolver: yupResolver(formSchema),
+  // });
 
-  const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(formSchena),
-  });
+  // const onSubmit = handleSubmit(async (value) => {
+  //   console.log(value);
+  //   const { email, password, fullName } = value;
+  //   const mainURL = "https://pidgin-backend.herokuapp.com";
+  //   const url = `${mainURL}/pidgin/user/register`;
 
-  const onSubmit = handleSubmit(async (value) => {
-    console.log(value);
-    const { userName, email, password } = value;
-    const mainURL = "http://localhost:9999";
-    const url = `${mainURL}/api/user/register`;
+  //   await axios.post(url, { fullName, email, password }).then((res) => {
+  //     console.log(res.data.data);
+  //     // dispatch(createUser(res.data.data));
+  //   });
 
-    const formData = new FormData();
-    formData.append("userName", userName);
-    formData.append("email", email);
-    formData.append("password", password);
-
-    await axios.post(url, formData);
-
-    // navigate("/confirm");
-  });
+  //   navigate("/Confirm");
+  // });
 
   return (
     <Container>
       <Wrapper>
         <Card1>
           <InnerCard1>
-            <Logo src={logo} />
+            <ImageHold>
+              <Logo src="/logo.png" />
+              <span>PIDGIN</span>
+            </ImageHold>
             <Text>Enter Make U See Beta Pidgin Words And Wetin E Mean</Text>
             <Text2>
               Abi you don get before?
@@ -59,43 +59,33 @@ const UserSignin = () => {
             </Text2>
           </InnerCard1>
         </Card1>
-        <Card2 onSubmit={onSubmit}>
+        <Card2>
           <HeadText>Make You Create Your Account</HeadText>
-          <Label>
-            <LabelText>Enter Username:</LabelText>
-            <span>{errors.userName?.message}</span>
-            <Inputs placeholder="Precious" {...register("userName")} />
-          </Label>
-          <Label>
+          <LabelHolder>
+            {/* <Error>This field must not be empty</Error> */}
+            <LabelText>Enter your name:</LabelText>
+            <Input placeholder="Frederick" />
+          </LabelHolder>
+          <LabelHolder>
+            {/* <Error>This field must not be empty</Error> */}
             <LabelText>Enter your email:</LabelText>
-            <span>{errors.email?.message}</span>
-            <Inputs placeholder="test@gmail.com" {...register("email")} />
-          </Label>
-          <Label>
+            <Input placeholder="test@gmail.com" type="email" />
+          </LabelHolder>
+          <LabelHolder>
+            {/* <Error>This field must not be empty</Error> */}
             <LabelText>Enter your password:</LabelText>
-            <span>{errors.password?.message}</span>
-            <Inputs
-              placeholder="6+ characters"
-              type="password"
-              {...register("password")}
-            />
-          </Label>
-          <Label>
+            <Input placeholder="6+ characters" type="password" />
+          </LabelHolder>
+          <LabelHolder>
+            {/* <Error>This field must not be empty</Error> */}
             <LabelText>Confirm your password:</LabelText>
-            <span>{errors.confirm?.message}</span>
-            <Inputs
-              placeholder="6+ characters"
-              type="password"
-              {...register("confirm")}
-            />
-          </Label>
-          <HoldLink2 to="">
-            <Submit type="submit">Sign up</Submit>
-          </HoldLink2>
+            <Input placeholder="6+ characters" type="password" />
+          </LabelHolder>
+          <Submit type="submit">Sign up</Submit>
           <Text3>
             Abi you don get before?
             <HoldLink to="/UserSignIn">
-              <span>Sign up</span>
+              <span>Sign In</span>
             </HoldLink>
           </Text3>
         </Card2>
@@ -155,40 +145,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const Text3 = styled.div`
-  display: none;
-  @media screen and (max-width: 1024px) and (min-width: 300px) {
-    width: 70%;
-    display: flex;
-    font-weight: 400;
-    color: black;
-    font-size: 13px;
-    margin-top: 10px;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    /* margin: 20px 0px 0px 30px; */
-    span {
-      font-size: 13px;
-      font-weight: 500;
-      margin-left: 2px;
-      color: blue;
-      cursor: pointer;
-    }
-  }
-`;
-
-const HoldLink2 = styled(NavLink)`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-`;
-const HoldLink = styled(NavLink)`
-  text-decoration: none;
-`;
-
 const Text2 = styled.div`
   width: 180px;
   display: flex;
@@ -217,10 +173,25 @@ const Text = styled.div`
   margin: 15px 0px 0px 20px;
 `;
 
+const ImageHold = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  span {
+    height: 70px;
+    display: flex;
+    align-items: flex-end;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+  }
+`;
+
 const Logo = styled.img`
-  width: 120px;
-  height: 80px;
-  object-fit: contain;
+  width: 65px;
+  height: 70px;
+  /* background-color: red; */
+  object-fit: cover;
   margin: 20px 0px 0px 20px;
   border-radius: 3px;
 `;
@@ -255,11 +226,68 @@ const Card1 = styled.div`
   }
 `;
 
+const Input = styled.input`
+  width: 97%;
+  height: 35px;
+  outline: none;
+  border-radius: 3px;
+  padding-left: 5px;
+  border: 1px solid lightgray;
+  margin-top: 3px;
+
+  ::placeholder {
+    opacity: 0.6;
+    font-size: 12px;
+  }
+  :focus {
+    outline: 2px solid rgb(76, 216, 250);
+    border: none;
+  }
+`;
+
+const LabelText = styled.label`
+  color: gray;
+  font-weight: 400;
+  font-size: 12px;
+`;
+const Error = styled.div`
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+`;
+
+const Text3 = styled.div`
+  display: none;
+  @media screen and (max-width: 1024px) and (min-width: 300px) {
+    width: 70%;
+    display: flex;
+    font-weight: 400;
+    color: black;
+    font-size: 13px;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    /* margin: 20px 0px 0px 30px; */
+    span {
+      font-size: 13px;
+      font-weight: 500;
+      margin-left: 2px;
+      color: blue;
+      cursor: pointer;
+    }
+  }
+`;
+
+const HoldLink = styled(NavLink)`
+  text-decoration: none;
+`;
+
 const Submit = styled.button`
-  width: 80%;
+  width: 90%;
   height: 40px;
   border: none;
-  background-color: black;
+  background-color: #0074f8;
   border-radius: 3px;
   color: white;
   margin: 20px 0px;
@@ -277,51 +305,16 @@ const Submit = styled.button`
   }
 `;
 
-const Inputs = styled.input`
-  width: 98%;
-  height: 55%;
-  outline: none;
-  border-radius: 3px;
-  padding-left: 5px;
-  border: 1px solid lightgray;
-
-  ::placeholder {
-    opacity: 0.6;
-    font-size: 12px;
-  }
-  :focus {
-    outline: 2px solid rgb(76, 216, 250);
-    border: none;
-  }
-`;
-
-const LabelText = styled.label`
-  width: 100%;
-  /* margin-right: 10px; */
-  font-size: 12px;
-  color: gray;
-  text-align: left;
-`;
-
-const Label = styled.div`
-  width: 80%;
-  height: 60px;
-  margin: 10px 0px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  span {
-    color: red;
-    font-size: 12px;
-  }
+const LabelHolder = styled.div`
+  width: 90%;
+  height: auto;
+  margin-bottom: 15px;
 `;
 
 const HeadText = styled.div`
-  margin: 30px 0px;
-  display: flex;
-  align-items: center;
-  font-weight: 600;
+  color: black;
+  font-weight: 500;
+  margin-bottom: 20px;
 `;
 
 const Card2 = styled.form`
